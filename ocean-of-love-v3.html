@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shuhurat 🌊</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;500&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep:#0a1628; --ocean1:#0d2b45; --ocean2:#1a4a6e; --ocean3:#2a7fad;
+  --foam:#a8d8ea; --sand:#f5e6c8; --gold:#c9a84c; --gold-light:#f0d080;
+  --text-light:#e8f4f8; --pink:#f7b8cc; --rose:#e8638a; --white:#fff8fb;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--deep);font-family:'Cormorant Garamond',serif;overflow-x:hidden;min-height:100vh;}
+
+/* ── INTRO ── */
+#intro{position:fixed;inset:0;z-index:100;background:var(--deep);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1.2s ease;}
+#intro.fade-out{opacity:0;pointer-events:none;}
+.intro-title{font-family:'Cinzel',serif;font-size:clamp(1.3rem,4vw,2.2rem);color:var(--gold-light);letter-spacing:.3em;text-align:center;animation:fadeUp 1.5s ease forwards;opacity:0;}
+.intro-sub{font-size:clamp(1rem,3vw,1.4rem);color:var(--foam);font-style:italic;margin-top:.8rem;text-align:center;animation:fadeUp 1.5s .6s ease forwards;opacity:0;padding:0 2rem;}
+.intro-arabic{font-size:clamp(1.4rem,4vw,2rem);color:var(--gold);margin-top:1.5rem;animation:fadeUp 1.5s 1s ease forwards;opacity:0;direction:rtl;}
+.enter-btn{margin-top:2.5rem;padding:.9rem 2.8rem;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel',serif;font-size:1rem;letter-spacing:.2em;cursor:pointer;animation:fadeUp 1.5s 1.5s ease forwards;opacity:0;transition:background .3s,color .3s;}
+.enter-btn:hover{background:var(--gold);color:var(--deep);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SCENE ── */
+#scene{position:relative;width:100vw;height:100vh;overflow:hidden;opacity:0;transition:opacity 1.5s ease;}
+#scene.visible{opacity:1;}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#040d1a 0%,#071a33 30%,#0d2b50 55%,#1a4a6e 75%,#2a6f9e 88%,#3a8fbf 100%);}
+.stars{position:absolute;inset:0;pointer-events:none;}
+.star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+@keyframes twinkle{0%,100%{opacity:var(--min,.2);transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.moon{position:absolute;top:7%;right:12%;width:65px;height:65px;background:radial-gradient(circle at 35% 35%,#fffbe0,#f0d080);border-radius:50%;box-shadow:0 0 40px 15px rgba(240,208,128,.25),0 0 80px 30px rgba(240,208,128,.1);}
+.moon::after{content:'';position:absolute;top:5px;right:5px;width:48px;height:48px;background:#0a1628;border-radius:50%;}
+
+.names-header{position:absolute;top:5%;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none;}
+.names-header .couple{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.5vw,1.5rem);color:var(--gold-light);letter-spacing:.25em;}
+.names-header .bismillah{font-size:clamp(.75rem,1.8vw,1rem);color:rgba(168,216,234,.7);font-style:italic;margin-top:.3rem;direction:rtl;}
+
+.ocean{position:absolute;bottom:0;left:0;right:0;height:40%;}
+.wave{position:absolute;bottom:0;left:-10%;right:-10%;height:100%;border-radius:45% 45% 0 0/30% 30% 0 0;}
+.wave1{background:linear-gradient(180deg,rgba(42,127,173,.7) 0%,#0d2b45 100%);animation:wave1 7s ease-in-out infinite;}
+.wave2{background:linear-gradient(180deg,rgba(26,74,110,.8) 0%,#071530 100%);bottom:-5%;animation:wave2 9s ease-in-out infinite;}
+.wave3{background:#061020;bottom:-12%;animation:wave3 11s ease-in-out infinite;}
+@keyframes wave1{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.04)}}
+@keyframes wave2{0%,100%{transform:translateX(0)}50%{transform:translateX(3%)}}
+@keyframes wave3{0%,100%{transform:translateX(0)}50%{transform:translateX(-2%)}}
+.foam-line{position:absolute;bottom:40%;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(168,216,234,.4),rgba(255,255,255,.6),rgba(168,216,234,.4),transparent);animation:foamShimmer 4s ease-in-out infinite;}
+@keyframes foamShimmer{0%,100%{opacity:.4}50%{opacity:1}}
+.shore{position:absolute;bottom:0;left:0;right:0;height:13%;background:linear-gradient(180deg,#c8a96e 0%,#b8954a 40%,#8b6914 100%);border-radius:60% 60% 0 0/50% 50% 0 0;}
+.shore::before{content:'';position:absolute;top:0;left:5%;right:5%;height:50%;background:linear-gradient(180deg,rgba(245,230,200,.5) 0%,transparent 100%);border-radius:50% 50% 0 0;}
+
+/* ── BOTTLES ── */
+.bottle{position:absolute;cursor:pointer;z-index:20;animation:bobFloat var(--bob,4s) ease-in-out infinite var(--bob-delay,0s);}
+.bottle:hover svg{filter:drop-shadow(0 4px 20px rgba(247,184,204,.8)) brightness(1.15);}
+.bottle.opened{opacity:.45;pointer-events:none;}
+@keyframes bobFloat{0%,100%{transform:translateY(0) rotate(var(--tilt,5deg))}50%{transform:translateY(-10px) rotate(calc(var(--tilt,5deg) - 4deg))}}
+.bottle-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:.6rem;color:var(--gold-light);letter-spacing:.1em;white-space:nowrap;opacity:.8;}
+
+/* ── COUNTER & HINT ── */
+.counter{position:absolute;top:6%;left:5%;font-family:'Cinzel',serif;font-size:.72rem;color:rgba(201,168,76,.6);letter-spacing:.15em;z-index:10;}
+.hint{position:absolute;bottom:22%;left:50%;transform:translateX(-50%);font-style:italic;color:rgba(168,216,234,.55);font-size:.9rem;letter-spacing:.08em;animation:pulse 3s ease-in-out infinite;pointer-events:none;white-space:nowrap;}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.9}}
+
+/* sparkle particles */
+.sparkle{position:fixed;pointer-events:none;animation:sparklePop .8s ease-out forwards;font-size:1rem;z-index:50;}
+@keyframes sparklePop{0%{opacity:1;transform:scale(.5) translateY(0)}100%{opacity:0;transform:scale(1.5) translateY(-40px)}}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,13,26,.88);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .5s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:linear-gradient(145deg,#0d2b45,#071a33);border:1px solid rgba(201,168,76,.4);border-radius:4px;max-width:460px;width:100%;padding:2.5rem 2rem;text-align:center;position:relative;box-shadow:0 0 60px rgba(42,127,173,.3);transform:translateY(20px);transition:transform .5s;}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-number{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold);letter-spacing:.3em;margin-bottom:.5rem;}
+.modal-arabic{font-size:1.35rem;color:var(--gold-light);direction:rtl;margin-bottom:1rem;line-height:1.7;}
+.modal-message{font-size:1.1rem;color:var(--text-light);line-height:1.9;font-style:italic;font-weight:300;margin-bottom:1.5rem;}
+.modal-decoration{color:var(--gold);font-size:1.1rem;letter-spacing:.5em;margin-bottom:1.5rem;}
+.modal-close{padding:.7rem 2.2rem;background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.2em;cursor:pointer;transition:background .3s,color .3s;}
+.modal-close:hover{background:var(--gold);color:var(--deep);}
+
+/* ── FINALE ── */
+#finale{position:fixed;inset:0;z-index:300;background:rgba(4,13,26,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 1s;overflow-y:auto;padding:2rem 1rem;}
+#finale.open{opacity:1;pointer-events:all;}
+
+.finale-title{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);color:var(--gold-light);letter-spacing:.3em;text-align:center;margin-bottom:.5rem;}
+.finale-heart{font-size:2.8rem;animation:heartBeat 1.2s ease-in-out infinite;text-align:center;margin-bottom:1.5rem;}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+
+.letter-wrapper{position:relative;max-width:520px;width:100%;margin:0 auto;}
+.letter-paper{background:linear-gradient(160deg,#fff8f0,#ffeedd);border-radius:4px;padding:2.4rem 2.2rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,.5),inset 0 0 30px rgba(201,168,76,.08);position:relative;}
+.letter-paper::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rose),var(--pink),var(--gold),var(--pink),var(--rose));}
+.letter-heading{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,4vw,2rem);color:var(--rose);text-align:center;margin-bottom:1.2rem;}
+.letter-body{font-family:'Cormorant Garamond',serif;font-size:clamp(.95rem,2.5vw,1.1rem);color:#4a2030;line-height:2;font-weight:400;}
+.letter-body p{margin-bottom:1rem;}
+.letter-sign{font-family:'Dancing Script',cursive;font-size:clamp(1.2rem,3vw,1.6rem);color:var(--rose);text-align:right;margin-top:1.2rem;}
+.letter-dua{font-family:'Cormorant Garamond',serif;font-size:.92rem;color:#8a5060;font-style:italic;text-align:center;margin-top:.9rem;direction:rtl;line-height:1.8;}
+
+.finale-close{margin-top:1.8rem;padding:.7rem 2rem;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.2em;cursor:pointer;transition:background .3s,color .3s;}
+.finale-close:hover{background:var(--gold);color:var(--deep);}
+
+/* confetti */
+.confetti-heart{position:fixed;top:-20px;font-size:1.2rem;animation:confettiFall var(--fall,4s) linear var(--fdelay,0s) infinite;pointer-events:none;z-index:301;}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-title">For Shuhurat 🌸</div>
+  <div class="intro-sub">From Jubayer, with love & dua 🌊</div>
+  <div class="intro-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <button class="enter-btn" onclick="enterScene()">Open My Heart →</button>
+</div>
+
+<!-- SCENE -->
+<div id="scene">
+  <div class="sky"></div>
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="names-header">
+    <div class="couple">Jubayer &nbsp;✦&nbsp; Shuhurat</div>
+    <div class="bismillah">بارك الله لكما وبارك عليكما</div>
+  </div>
+  <div class="counter" id="counter">0 / 6 messages found</div>
+  <div class="ocean">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+  <div class="foam-line"></div>
+  <div class="shore"></div>
+  <div class="hint" id="hint">✦ Touch the bottles washing ashore ✦</div>
+</div>
+
+<!-- BOTTLE MESSAGE MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-number" id="modal-num">MESSAGE I</div>
+    <div class="modal-arabic" id="modal-arabic"></div>
+    <div class="modal-message" id="modal-msg"></div>
+    <div class="modal-decoration">❧ ✦ ❧</div>
+    <button class="modal-close" onclick="closeModal()">Close the Bottle</button>
+  </div>
+</div>
+
+<!-- FINALE -->
+<div id="finale">
+  <div class="finale-title">Jubayer &nbsp;✦&nbsp; Shuhurat</div>
+  <div class="finale-heart">💕</div>
+  <div class="letter-wrapper">
+    <div class="letter-paper">
+      <div class="letter-heading">My Dearest Shuhurat,</div>
+      <div class="letter-body">
+        <p>Alhamdulillah — all praise belongs to Allah, who wrote your name into the story of my life. I did not know what warmth truly felt like until I found it in your presence.</p>
+        <p>You are the kind of person the Prophet ﷺ described when he said the best of this world is a righteous companion. Every day I see that in you — in your patience, your kindness, and the quiet strength you carry without even realizing it.</p>
+        <p>I pray to Allah that He keeps us both on His straight path, that He fills our days with barakah, and that wherever this journey takes us — He always keeps our hearts close to each other and close to Him.</p>
+        <p>I do not have poetry grand enough for what I feel. I only have this — a simple, honest dua: <em>"Ya Allah, bless her in every breath she takes, in every step she walks, and in every dream she carries in her heart."</em></p>
+        <p>You deserve oceans of kindness, Shuhurat. And I will spend every day trying to give you at least one wave. 🌊</p>
+      </div>
+      <div class="letter-sign">Always yours, Jubayer 💙</div>
+      <div class="letter-dua">رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ</div>
+    </div>
+  </div>
+  <button class="finale-close" onclick="closeFinale()">← Back to the Ocean</button>
+</div>
+
+<script>
+const messages = [
+  { arabic:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", ayah:"(Surah Ash-Sharh 94:6)", text:"Shuhurat, Allah promises that with every hardship comes ease. Knowing you walk beside me in this dunya makes every challenge lighter and every blessing more beautiful. May He always keep our hearts close." },
+  { arabic:"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا", ayah:"(Surah Ar-Rum 30:21)", text:"Among Allah's greatest signs is that He created for us companions to find peace in. In you, Shuhurat, I see the mercy and love that Allah speaks of in His holy words. You are a gift I am forever grateful for." },
+  { arabic:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ", ayah:"(Surah Al-Furqan 25:74)", text:"This is the dua I make for us — that Allah makes us the coolness of each other's eyes, a source of joy and calm, building a life together under His beautiful guidance and endless blessings." },
+  { arabic:"اللَّهُمَّ بَارِكْ لَنَا", ayah:"A dua from the heart", text:"Every morning I ask Allah to bless you — your smile, your patience, your heart, your journey. You deserve all the warmth of this world and the next. I am so grateful He wrote your name into my story." },
+  { arabic:"الدُّنْيَا مَتَاعٌ وَخَيْرُ مَتَاعِهَا الزَّوْجَةُ الصَّالِحَةُ", ayah:"(Hadith — Muslim)", text:"The Prophet ﷺ said the best treasure of this world is a righteous companion. Shuhurat, you remind me of Allah's mercy every time you are kind, patient, and sincere. May He reward you infinitely for that." },
+  { arabic:"وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ", ayah:"(Surah Al-Baqarah 2:216)", text:"Whatever road Allah places us on, I trust His plan for us is the most beautiful. I make dua that He keeps our bond pure, fills our future with His noor, and grants us Jannah together, inshaAllah. 🌙" }
+];
+
+const bottlePositions = [
+  {left:'6%', bottom:'17%', bob:'4.2s', delay:'0s',   tilt:'8deg'},
+  {left:'19%',bottom:'14%', bob:'5.1s', delay:'0.8s', tilt:'-5deg'},
+  {left:'34%',bottom:'18%', bob:'3.8s', delay:'0.3s', tilt:'6deg'},
+  {left:'54%',bottom:'14%', bob:'4.9s', delay:'1.2s', tilt:'-8deg'},
+  {left:'70%',bottom:'17%', bob:'4.4s', delay:'0.5s', tilt:'4deg'},
+  {left:'83%',bottom:'14%', bob:'5.6s', delay:'1.8s', tilt:'-6deg'},
+];
+
+const bottleColors = [
+  ['#1a6a8a','#0d3d5c'],['#2a7f6a','#0d4a3a'],['#5a3a8a','#2d1a5a'],
+  ['#8a6a1a','#5a3d0a'],['#1a4a8a','#0a2050'],['#8a2a4a','#5a0a2a'],
+];
+
+let opened = new Set();
+
+function makeStars() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 160; i++) {
+    const s = document.createElement('div'); s.className='star';
+    const sz = Math.random()*2.5+0.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*65}%;left:${Math.random()*100}%;--min:${Math.random()*.3+.1};--dur:${Math.random()*3+2}s;--delay:${Math.random()*4}s;`;
+    c.appendChild(s);
+  }
+}
+
+function bottleSVG(c1, c2) {
+  const id = c1.replace('#','');
+  return `<svg width="48" height="86" viewBox="0 0 52 90" fill="none">
+    <rect x="19" y="2" width="14" height="10" rx="3" fill="${c1}" opacity=".9"/>
+    <rect x="21" y="2" width="10" height="4" rx="2" fill="#c9a84c" opacity=".8"/>
+    <ellipse cx="26" cy="20" rx="12" ry="8" fill="${c1}" opacity=".85"/>
+    <rect x="14" y="18" width="24" height="56" rx="12" fill="url(#bg${id})"/>
+    <ellipse cx="26" cy="74" rx="12" ry="6" fill="${c2}" opacity=".7"/>
+    <rect x="17" y="22" width="6" height="40" rx="3" fill="white" opacity=".12"/>
+    <text x="26" y="50" text-anchor="middle" font-size="16" fill="rgba(240,208,128,.9)">💌</text>
+    <defs><linearGradient id="bg${id}" x1="14" y1="18" x2="38" y2="74" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="${c1}" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="${c2}" stop-opacity=".95"/>
+    </linearGradient></defs>
+  </svg>`;
+}
+
+function spawnBottles() {
+  const scene = document.getElementById('scene');
+  messages.forEach((_, i) => {
+    const div = document.createElement('div'); div.className='bottle';
+    const p = bottlePositions[i];
+    div.style.cssText=`left:${p.left};bottom:${p.bottom};--bob:${p.bob};--bob-delay:${p.delay};--tilt:${p.tilt};`;
+    div.innerHTML = bottleSVG(...bottleColors[i]) + `<div class="bottle-label">OPEN</div>`;
+    div.addEventListener('click', e => openBottle(i, div, e));
+    scene.appendChild(div);
+  });
+}
+
+function openBottle(idx, el, e) {
+  spawnSparkles(e.clientX, e.clientY);
+  const m = messages[idx];
+  document.getElementById('modal-num').textContent = `MESSAGE ${['I','II','III','IV','V','VI'][idx]}`;
+  document.getElementById('modal-arabic').innerHTML = `${m.arabic}<br><small style="font-size:.65em;color:var(--foam);font-style:italic">${m.ayah}</small>`;
+  document.getElementById('modal-msg').textContent = m.text;
+  document.getElementById('modal').classList.add('open');
+  if (!opened.has(idx)) {
+    opened.add(idx);
+    el.classList.add('opened');
+    el.querySelector('.bottle-label').textContent = '✓';
+    updateCounter();
+  }
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function updateCounter() {
+  document.getElementById('counter').textContent = `${opened.size} / 6 messages found`;
+  if (opened.size === 6) {
+    document.getElementById('hint').textContent = '✦ All messages found! A surprise awaits... ✦';
+    document.getElementById('counter').style.color = 'rgba(247,184,204,.9)';
+    spawnConfetti();
+    setTimeout(() => document.getElementById('finale').classList.add('open'), 3000);
+  }
+}
+
+function spawnSparkles(x, y) {
+  const emojis = ['✨','🌸','💕','⭐','🌟','💫'];
+  for (let i = 0; i < 7; i++) {
+    const sp = document.createElement('div'); sp.className='sparkle';
+    sp.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    sp.style.cssText = `left:${x+(Math.random()-.5)*80}px;top:${y+(Math.random()-.5)*60}px;`;
+    document.body.appendChild(sp);
+    setTimeout(() => sp.remove(), 900);
+  }
+}
+
+function spawnConfetti() {
+  const hearts = ['💕','🌸','✨','💙','🌟','💖'];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement('div'); h.className='confetti-heart';
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.cssText = `left:${Math.random()*100}vw;--fall:${3+Math.random()*4}s;--fdelay:${Math.random()*3}s;`;
+    document.body.appendChild(h);
+  }
+}
+
+function closeFinale() { document.getElementById('finale').classList.remove('open'); }
+
+function enterScene() {
+  document.getElementById('intro').classList.add('fade-out');
+  document.getElementById('scene').classList.add('visible');
+  makeStars();
+  setTimeout(spawnBottles, 800);
+}
+
+document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+document.getElementById('finale').addEventListener('click', function(e){ if(e.target===this) closeFinale(); });
+</script>
+</body>
+</html>
